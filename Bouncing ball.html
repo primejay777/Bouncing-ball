@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Jayral Deniega">
+    <title>Bouncing Ball</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        // Get the canvas element
+const canvas = document.querySelector("canvas");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const ctx = canvas.getContext("2d");
+
+// Initialize ball properties
+let x = Math.floor(Math.random() * innerWidth);
+let y = Math.floor(Math.random() * innerHeight);
+let vx = Math.floor(Math.random() * 2); // X velocity
+let vy = Math.floor(Math.random() * 4); // Y velocity
+const radius = 20;
+
+// Animation loop
+function move() {
+    requestAnimationFrame(move);
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+    // Draw the ball
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+    ctx.stroke();
+
+    // Bounce off the edges
+    if (x + radius > innerWidth || x - radius < 0) {
+        vx = -vx;
+    }
+    if (y + radius > innerHeight || y - radius < 0) {
+        vy = -vy;
+    }
+
+    // Update position
+    x += vx;
+    y += vy;
+}
+
+move();
+    </script>
+</body>
+</html>
